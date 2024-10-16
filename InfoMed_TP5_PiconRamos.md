@@ -28,3 +28,13 @@ En este modelo relacional, todos los atributos de las tablas (Pacientes, Medicos
 La base de datos no está completamente normalizada. Por ejemplo, para normalizar la tabla Consultas y llevarla a la Tercera Forma Normal, se puede dividir en tres tablas: Consultas, Diagnósticos, y Tratamientos. La tabla Diagnósticos contendría los detalles del diagnóstico y su código SNOMED, mientras que la tabla Tratamientos almacenaría los tratamientos asociados a cada diagnóstico. La tabla Consultas mantendría una clave foránea hacia Diagnósticos en lugar de almacenar directamente el diagnóstico y el tratamiento, evitando así cualquier dependencia transitoria entre los atributos. Esto garantiza que el tratamiento dependa únicamente del diagnóstico y no de la consulta, logrando que la base de datos cumpla con los requisitos de la 3NF, donde todos los atributos no clave dependen exclusivamente de la clave primaria.
 
 
+## **PARTE 2:** Bases de Datos
+
+### 1. Cuando se realizan consultas sobre la tabla paciente agrupando por ciudad los tiempos de respuesta son demasiado largos. Proponer mediante una query SQL una solución a este problema.
+
+```
+CREATE INDEX index_pacientesciudad ON Pacientes(ciudad);
+```
+![query 01](imágenes/queries_resultados/01.png)
+
+### 2.

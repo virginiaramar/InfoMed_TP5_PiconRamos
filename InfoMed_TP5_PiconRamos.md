@@ -45,7 +45,8 @@ SELECT
     EXTRACT(YEAR FROM AGE(fecha_nacimiento)) AS edad
 FROM Pacientes;
 ```
-![query 02](imágenes/queries_resultados/02.png)
+![query 02_1](imágenes/queries_resultados/02_1.png)
+![query 02_2](imágenes/queries_resultados/02_2.png)
 
 ### 3. La paciente, “Luciana Gómez”, ha cambiado de dirección. Antes vivía en “Avenida Las Heras 121” en “Buenos Aires”, pero ahora vive en “Calle Corrientes 500” en “Buenos Aires”. Actualizar la dirección de este paciente en la base de datos.
 
@@ -81,7 +82,8 @@ SET ciudad = CASE
     ELSE ciudad
 END;
 ```
-![query 05](imágenes/queries_resultados/05.png)
+![query 05_1](imágenes/queries_resultados/05_1.png)
+![query 05_2](imágenes/queries_resultados/05_2.png)
 
 ### 6. Obtener el nombre y la dirección de los pacientes que viven en Buenos Aires.
 

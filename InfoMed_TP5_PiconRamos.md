@@ -14,7 +14,7 @@ La base de datos utiliza un modelo relacional. Esto significa que los datos est�
 A su vez, la base de datos es transaccional, lo que significa que está diseñada para realizar operaciones rápidas y eficientes. Por ejemplo, al registrar una nueva consulta, la base de datos actualiza automáticamente los registros correspondientes en las tablas de Pacientes, Medicos y Consultas, asegurando que toda la información esté sincronizada y disponible para el personal médico.
 
 ### 2. Armar el diagrama entidad-relación de la base de datos dada. 
-<img src="imágenes/Diagrama.png" alt="ejemplo_modelo-ER" style="width:500px;"/>
+![modelo-ER](imágenes/Diagrama.png)
 
 El diagrama de entidad-relación (ER) fue realizado utilizando la aplicación Dia, una herramienta de software libre que permite crear diagramas con facilidad y exportarlos en formatos como PNG. Para este proyecto, se asumió que las entidades Consultas, Recetas, Pacientes, Medicos, Especialidades, y Medicamentos son todas entidades fuertes, ya que tienen claves primarias propias. Las relaciones entre las entidades se definieron principalmente como de 1 a N. En particular, las relaciones entre Consultas con Pacientes y Medicos, así como las relaciones entre Recetas con Medicamentos, Pacientes, y Medicos, tienen participación total desde el lado de Consultas y Recetas (doble línea), mientras que las entidades Pacientes, Medicos, Especialidades, y Medicamentos tienen participación parcial (línea simple).
 

@@ -37,4 +37,97 @@ CREATE INDEX index_pacientesciudad ON Pacientes(ciudad);
 ```
 ![query 01](imágenes/queries_resultados/01.png)
 
-### 2.
+### 2. Se tiene la fecha de nacimiento de los pacientes. Se desea calcular la edad de los pacientes y almacenarla de forma dinámica en el sistema ya que es un valor típicamente consultado, junto con otra información relevante del paciente.
+
+```
+SELECT 
+    id_paciente,
+    EXTRACT(YEAR FROM AGE(fecha_nacimiento)) AS edad
+FROM Pacientes;
+```
+![query 02](imágenes/queries_resultados/02.png)
+
+### 3. La paciente, “Luciana Gómez”, ha cambiado de dirección. Antes vivía en “Avenida Las Heras 121” en “Buenos Aires”, pero ahora vive en “Calle Corrientes 500” en “Buenos Aires”. Actualizar la dirección de este paciente en la base de datos.
+
+```
+UPDATE Pacientes
+SET calle = 'Calle Corrientes', numero = '500', ciudad = 'Buenos Aires'
+WHERE nombre = 'Luciana Gómez' 
+  AND calle = 'Avenida Las Heras' 
+  AND numero = '121'
+  AND ciudad = 'Bs Aires';
+```
+![query 03](imágenes/queries_resultados/03.png)
+
+### 4. Seleccionar el nombre y la matrícula de cada médico cuya especialidad sea identificada por el id 4.
+
+```
+SELECT nombre, matricula
+FROM Medicos
+WHERE especialidad_id = 4;
+```
+![query 04](imágenes/queries_resultados/04.png)
+
+### 5. Puede pasar que haya inconsistencias en la forma en la que están escritos los nombres de las ciudades, ¿cómo se corrige esto? Agregar la query correspondiente.
+
+```
+UPDATE Pacientes
+SET ciudad = CASE
+    WHEN ciudad ILIKE '%buen%' AND ciudad ILIKE '%ai%' THEN 'Buenos Aires'
+    WHEN ciudad ILIKE '%rosar%' THEN 'Rosario'
+    WHEN ciudad ILIKE '%santa%' AND ciudad ILIKE '%fe%' THEN 'Santa Fe'
+    WHEN ciudad ILIKE '%cordob%' OR ciudad ILIKE '%coro%'OR ciudad ILIKE '%córodba%' THEN 'Córdoba'
+    WHEN ciudad ILIKE '%mend%' THEN 'Mendoza'
+    ELSE ciudad
+END;
+```
+![query 05](imágenes/queries_resultados/05.png)
+
+### 6. Obtener el nombre y la dirección de los pacientes que viven en Buenos Aires.
+
+```
+SELECT nombre, calle, numero
+FROM Pacientes
+WHERE ciudad = 'Buenos Aires';
+```
+![query 06](imágenes/queries_resultados/06.png)
+
+### 7. Cantidad de pacientes que viven en cada ciudad.
+
+```
+SELECT ciudad, COUNT(*) AS cantidadpacientes
+FROM Pacientes
+GROUP BY ciudad;
+```
+![query 07](imágenes/queries_resultados/07.png)
+
+### 8. Cantidad de pacientes por sexo que viven en cada ciudad.
+
+```
+SELECT p.ciudad, s.descripcion AS sexo, COUNT(*) AS cantidad_pacientes
+FROM Pacientes p
+JOIN SexoBiologico s ON p.id_sexo = s.id_sexo
+GROUP BY p.ciudad, s.descripcion
+ORDER BY p.ciudad;
+```
+![query 08](imágenes/queries_resultados/08.png)
+
+### 9. Obtener la cantidad de recetas emitidas por cada médico.
+
+```
+SELECT m.nombre AS medico, COUNT(*) AS cantidad_recetas
+FROM Recetas r
+JOIN Medicos m ON r.id_medico = m.id_medico
+GROUP BY m.nombre;
+```
+![query 09](imágenes/queries_resultados/09.png)
+
+### 10. Obtener todas las consultas médicas realizadas por el médico con ID igual a 3 durante el mes de agosto de 2024.
+
+```
+SELECT *
+FROM Consultas
+WHERE id_medico = 3
+  AND fecha BETWEEN '2024-08-01' AND '2024-08-31';
+```
+![query 10](imágenes/queries_resultados/10.png)
